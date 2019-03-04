@@ -8,6 +8,9 @@ import java.awt.*;
 
 public class messageEvents extends ListenerAdapter {
     public static String prefix = ">";
+    public static String[] friendCodeProfiles = new String[10];
+    public static String friendCodes = "Tharsan: SW-6781-6902-9305 \n Raj: SW-2902-6105-7131 \n Xavier: SW-3013-3861-3242 \n Keigan: SW-8135-8671-8609 \n Tyler King: SW-5788-4208-6781 \n Carlos: SW-5291-5908-8695";
+    public static String mainCDescription = "";
 
     public void onMessageReceived(MessageReceivedEvent event) {
         System.out.println("message received: " + event.getAuthor().getName() + " : " + event.getMessage().getContentDisplay());
@@ -19,7 +22,7 @@ public class messageEvents extends ListenerAdapter {
             EmbedBuilder helpEmb = new EmbedBuilder();
             helpEmb.setColor(new Color(128, 0, 255));
             helpEmb.setTitle("Commands", null);
-            helpEmb.setDescription(">ramansHeight + (number to convert)\n >spotify \n >friendCodes");
+            helpEmb.setDescription(">ramansHeight [number to convert] \n >spotify \n >friendCodes \n >addFCode [SW-XXXX-XXXX-XXXX] [name]");
             //helpEmb.addField("Title of field", "test of field", false);
             helpEmb.setThumbnail("https://i.imgur.com/4cmwZNG.png");
             helpEmb.addBlankField(false);
@@ -50,9 +53,30 @@ public class messageEvents extends ListenerAdapter {
             EmbedBuilder ninEmb = new EmbedBuilder();
             ninEmb.setColor(new Color(228, 0, 15));
             ninEmb.setTitle("Nintendo Switch Online Friend Codes", null);
-            ninEmb.setDescription("Tharsan - SW-6781-6902-9305 \n Raj - SW-2902-6105-7131 \n Xavier - SW-3013-3861-3242 \n Keigan - SW-8135-8671-8609 \n Tyler King - SW-5788-4208-6781");
+            ninEmb.setDescription(friendCodes);
             ninEmb.setThumbnail("https://seeklogo.net/wp-content/uploads/2016/10/nintendo-switch-logo-preview-400x400.png");
             event.getChannel().sendMessage(ninEmb.build()).queue();
+
+        }else if(event.getMessage().getContentRaw().startsWith(prefix + "addFCode")){
+            String addCodeRaw = event.getMessage().getContentDisplay();
+            String[] codeSplit = addCodeRaw.split(" ");
+            String[] friendCodeArrayCheck = codeSplit[1].split("-");
+
+            if(codeSplit[0].equalsIgnoreCase(">addFCode") && friendCodeArrayCheck[0].equals("SW")){
+                int numberCheckOne = Integer.parseInt(friendCodeArrayCheck[1]);
+                int numberCheckTwo = Integer.parseInt(friendCodeArrayCheck[2]);
+                int numberCheckThree = Integer.parseInt(friendCodeArrayCheck[3]);
+                if(((numberCheckOne > 999) && (numberCheckOne < 10000)) && ((numberCheckTwo > 999) && (numberCheckTwo < 10000)) && ((numberCheckThree > 999) && (numberCheckThree < 10000))){
+                    String tempCode = String.format("%s: SW-%s-%s-%s", codeSplit[2], friendCodeArrayCheck[1], friendCodeArrayCheck[2], friendCodeArrayCheck[3]);
+                    friendCodes = friendCodes.concat("\n" + tempCode);
+                    event.getChannel().sendMessage("Code Added :)").queue();
+                }else{
+                    event.getChannel().sendMessage("Invalid code. Please make sure the code begins with SW").queue();
+                }
+            }
+        }else if(event.getMessage().getContentRaw().startsWith(prefix + "removeFCode")){
+            //Checks for name
+            //Need to make directory for saved "code profiles"
         }
     }
 }
