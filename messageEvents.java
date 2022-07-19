@@ -9,7 +9,7 @@ import java.awt.*;
 public class messageEvents extends ListenerAdapter {
     public static String prefix = ">";
     public static String[] friendCodeProfiles = new String[10];
-    public static String friendCodes = "Tharsan: SW-6781-6902-9305 \n Raj: SW-2902-6105-7131 \n Xavier: SW-3013-3861-3242 \n Keigan: SW-8135-8671-8609 \n Tyler King: SW-5788-4208-6781 \n Carlos: SW-5291-5908-8695";
+    public static String friendCodes = "Tharsan: SW-6781-6902-XXXX \n Raj: SW-2902-6105-XXXX \n Xavier: SW-3013-3861-XXXX \n Keigan: SW-8135-8671-XXXX \n Tyler King: SW-5788-4208-XXXX \n Carlos: SW-5291-5908-XXXX";
     public static String mainCDescription = "";
 
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -40,7 +40,7 @@ public class messageEvents extends ListenerAdapter {
             EmbedBuilder spotEmb = new EmbedBuilder();
             spotEmb.setColor(new Color(29, 185, 84));
             spotEmb.setTitle("Owed for Spotify", null);
-            spotEmb.setDescription("Money owed to Raman for spotify: \n E-Transfer: RamanjotPooni@hotmail.com");
+            spotEmb.setDescription("Money owed to Raman for spotify: \n E-Transfer: --@hotmail.com");
             spotEmb.addField("Ryan", "-$22.50", true);
             spotEmb.addField("Tharsan", "Covered - Whole Year", true);
             spotEmb.addField("Manraaj", "$7.50", true);
