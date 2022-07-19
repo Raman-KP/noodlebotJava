@@ -22,7 +22,7 @@ public class noodle extends ListenerAdapter {
 
             //Turn On
             JDABuilder builder = new JDABuilder(AccountType.BOT);
-            builder.setToken("wpgj_WYQJmI");
+            builder.setToken("token");
             builder.setStatus(OnlineStatus.ONLINE);
             builder.setGame(Game.playing("witchyo gurl || >help"));
             timer.schedule(new dailyMessages(), time);
